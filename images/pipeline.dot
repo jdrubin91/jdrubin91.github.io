@@ -1,27 +1,36 @@
 digraph BioinformaticsPipeline {
-    rankdir=LR;
-    node [shape=rectangle, style=filled, color="#A0C4FF", fontname="Arial"];
-
+    // Set layout direction from Top to Bottom
+    rankdir=TB;
+    // Set global node style
+    node [shape=rectangle, style=filled, fontname="Helvetica", fontsize=12, margin=0.2];
+    // Set global edge style
+    edge [color="#7F7F7F"];
+    
+    // Cluster to group the pipeline
     subgraph cluster0 {
         label="Automated Bioinformatics Pipeline on AWS";
         style=filled;
-        color="#F1F5FD";
-
-        S3Input [label="1. Data Ingestion\n(Amazon S3)", shape=folder];
-        LambdaTrigger [label="2. Trigger Processing\n(AWS Lambda)"];
-        Preprocessing [label="3. Data Preprocessing\n(AWS Lambda/AWS Batch)"];
-        Alignment [label="4. Alignment & Mapping\n(AWS Batch)"];
-        PostProcessing [label="5. Post-Alignment Processing\n(AWS Batch)"];
-        VariantCalling [label="6. Variant Calling\n(AWS Batch/Step Functions)"];
-        Annotation [label="7. Annotation\n(AWS Batch)"];
-        S3Output [label="8. Store Results\n(Amazon S3)", shape=folder];
-        Database [label="8a. Metadata Storage\n(Amazon RDS/DynamoDB)", shape=cylinder];
-        Visualization [label="9. Data Visualization\n(Amazon QuickSight)"];
-        Notifications [label="10. Notifications\n(Amazon SNS)", shape=note];
-        Monitoring [label="11. Monitoring\n(Amazon CloudWatch)", shape=note];
+        color="#F5F5F5";
+        fontname="Helvetica";
+        fontsize=16;
+        labelloc="t";
+    
+        // Define nodes with soft, muted colors
+        S3Input [label="1. Data Ingestion\nAmazon S3", shape=folder, fillcolor="#B0E0E6"]; // Powder Blue
+        LambdaTrigger [label="2. Trigger Processing\nAWS Lambda", fillcolor="#98FB98"]; // Pale Green
+        Preprocessing [label="3. Data Preprocessing\nAWS Lambda / AWS Batch", fillcolor="#FFDAB9"]; // Peach Puff
+        Alignment [label="4. Alignment & Mapping\nAWS Batch", fillcolor="#FFDAB9"];
+        PostProcessing [label="5. Post-Alignment Processing\nAWS Batch", fillcolor="#FFDAB9"];
+        VariantCalling [label="6. Variant Calling\nAWS Batch / AWS Step Functions", fillcolor="#FFDAB9"];
+        Annotation [label="7. Annotation\nAWS Batch", fillcolor="#FFDAB9"];
+        S3Output [label="8. Store Results\nAmazon RDS / Snowflake", shape=cylinder, fillcolor="#B0E0E6"];
+        Database [label="8a. Metadata Storage\nAmazon RDS / Snowflake", shape=cylinder, fillcolor="#E6E6FA"]; // Lavender
+        Visualization [label="9. Data Visualization\nCustom Python/HTML", fillcolor="#FFE4E1"]; // Misty Rose
+        Notifications [label="10. Notifications\nAmazon SNS", shape=note, fillcolor="#FFFACD"]; // Lemon Chiffon
     }
-
-    S3Input -> LambdaTrigger [arrowhead=vee];
+    
+    // Define edges
+    S3Input -> LambdaTrigger;
     LambdaTrigger -> Preprocessing;
     Preprocessing -> Alignment;
     Alignment -> PostProcessing;
@@ -29,7 +38,15 @@ digraph BioinformaticsPipeline {
     VariantCalling -> Annotation;
     Annotation -> S3Output;
     Annotation -> Database;
-    S3Output -> Visualization;
-    VariantCalling -> Notifications [style=dashed];
-    VariantCalling -> Monitoring [style=dashed];
+
+    // Branch to Visualization
+    S3Output -> Visualization [style=dashed];
+    Database -> Visualization [style=dashed];
+
+    // Notifications and Monitoring
+    Annotation -> Notifications [style=dotted];
+    VariantCalling -> Notifications [style=dotted];
+    Preprocessing -> Notifications [style=dotted];
+    Alignment -> Notifications [style=dotted];
+    PostProcessing -> Notifications [style=dotted];
 }
