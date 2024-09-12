@@ -52,10 +52,19 @@
   </header>
 
   <!-- About Section -->
+  <!-- About Me Section -->
   <section class="container mt-5">
     <h2 class="section-title text-center">About Me</h2>
-    <p class="text-center">An experienced data scientist specializing in bioinformatics, machine learning, and signal processing. With a background in biological data analysis, I bring a unique perspective to solving complex problems. I have successfully led projects from conception to implementation, delivering actionable insights from data.</p>
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center mb-4 mb-md-0">
+        <img src="images/profile.jpeg" alt="Jonathan D. Rubin, PhD" class="img-fluid rounded-circle border shadow" style="max-width: 200px;">
+      </div>
+      <div class="col-md-8">
+        <p class="text-justify">An experienced data scientist specializing in bioinformatics, machine learning, and signal processing. With a background in biological data analysis, I bring a unique perspective to solving complex problems. I have successfully led projects from conception to implementation, delivering actionable insights from data.</p>
+      </div>
+    </div>
   </section>
+  
 
   <!-- Projects Section -->
   <section class="container mt-5">
@@ -86,7 +95,7 @@
 
       <!-- Project 3 -->
       <div class="col-md-4 project-card">
-        <div class="card h-100">
+        <div class="card h-100" id="myDiv">
             <script>
                 // Generate random data for the 3D plot
                 var N = 100;
