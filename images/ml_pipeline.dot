@@ -1,0 +1,38 @@
+digraph MachineLearningPipeline {
+    // Set layout direction from Top to Bottom
+    rankdir=TB;
+    // Set global node style
+    node [shape=rectangle, style=filled, fontname="Helvetica", fontsize=12, margin=0.2];
+    // Set global edge style
+    edge [color="#7F7F7F"];
+    
+    // Cluster to group the pipeline
+    subgraph cluster0 {
+        label="Automated Machine Learning Pipeline on AWS";
+        style=filled;
+        color="#F5F5F5";
+        fontname="Helvetica";
+        fontsize=16;
+        labelloc="t";
+    
+        // Define nodes with soft, muted colors
+        S3Storage [label="1. Data\n(Amazon S3)", shape=folder, fillcolor="#B0E0E6"];
+        DataPreprocessing [label="2. Data Preprocessing\n(AWS Glue)", fillcolor="#FFDAB9"]; // Peach Puff
+        FeatureEngineering [label="3. Feature Engineering & Selection\n(AWS Glue / EMR)", fillcolor="#FFDAB9"];
+        ModelSelection [label="4. Model Selection\n(AWS SageMaker)", fillcolor="#98FB98"]; // Pale Green
+        HyperparameterTuning [label="5. Hyperparameter Tuning\n(AWS SageMaker)", fillcolor="#98FB98"];
+        ModelTraining [label="6. Model Training\n(AWS SageMaker)", fillcolor="#98FB98"];
+        Evaluation [label="7. Model Evaluation\n(AWS SageMaker)", fillcolor="#98FB98"];
+        ModelDeployment [label="8. Model Deployment\n(AWS SageMaker)", fillcolor="#98FB98"];
+    }
+    
+    // Define edges
+    S3Storage -> DataPreprocessing;
+    DataPreprocessing -> FeatureEngineering;
+    FeatureEngineering -> ModelSelection;
+    ModelSelection -> HyperparameterTuning;
+    HyperparameterTuning -> ModelTraining;
+    ModelTraining -> Evaluation;
+    Evaluation -> ModelDeployment;
+
+}
