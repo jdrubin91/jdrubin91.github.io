@@ -1,0 +1,35 @@
+digraph BioinformaticsPipeline {
+    rankdir=LR;
+    node [shape=rectangle, style=filled, color="#A0C4FF", fontname="Arial"];
+
+    subgraph cluster0 {
+        label="Automated Bioinformatics Pipeline on AWS";
+        style=filled;
+        color="#F1F5FD";
+
+        S3Input [label="1. Data Ingestion\n(Amazon S3)", shape=folder];
+        LambdaTrigger [label="2. Trigger Processing\n(AWS Lambda)"];
+        Preprocessing [label="3. Data Preprocessing\n(AWS Lambda/AWS Batch)"];
+        Alignment [label="4. Alignment & Mapping\n(AWS Batch)"];
+        PostProcessing [label="5. Post-Alignment Processing\n(AWS Batch)"];
+        VariantCalling [label="6. Variant Calling\n(AWS Batch/Step Functions)"];
+        Annotation [label="7. Annotation\n(AWS Batch)"];
+        S3Output [label="8. Store Results\n(Amazon S3)", shape=folder];
+        Database [label="8a. Metadata Storage\n(Amazon RDS/DynamoDB)", shape=cylinder];
+        Visualization [label="9. Data Visualization\n(Amazon QuickSight)"];
+        Notifications [label="10. Notifications\n(Amazon SNS)", shape=note];
+        Monitoring [label="11. Monitoring\n(Amazon CloudWatch)", shape=note];
+    }
+
+    S3Input -> LambdaTrigger [arrowhead=vee];
+    LambdaTrigger -> Preprocessing;
+    Preprocessing -> Alignment;
+    Alignment -> PostProcessing;
+    PostProcessing -> VariantCalling;
+    VariantCalling -> Annotation;
+    Annotation -> S3Output;
+    Annotation -> Database;
+    S3Output -> Visualization;
+    VariantCalling -> Notifications [style=dashed];
+    VariantCalling -> Monitoring [style=dashed];
+}
