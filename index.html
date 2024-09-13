@@ -13,6 +13,8 @@
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+  <link rel="icon" href="images/logo.png" type="image/x-icon">
+
   <!-- Custom CSS -->
   <style>
     body {
@@ -94,15 +96,30 @@
       </div>
 
       <!-- Project 2 -->
-      <div class="col-md-4 project-card">
-        <div class="card h-100">
-          <img src="images/ml_pipeline.png" class="card-img-top img-fluid" alt="Project Image">
-          <div class="card-body">
-            <h5 class="card-title">Predictive Machine Learning Models</h5>
-            <p class="card-text">Data processing, feature engineering, model selection, hyperparameter tuning, and evaluation.</p>
+<div class="col-md-4 project-card">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Predictive Machine Learning Models</h5>
+        <p class="card-text">Data processing, feature engineering, model selection, hyperparameter tuning, and evaluation.</p>
+        
+        <!-- Grid of Four Images -->
+        <div class="row text-center">
+          <div class="col-6">
+            <img src="images/hirearchichal.png" class="img-fluid mb-2" alt="Image 1">
+          </div>
+          <div class="col-6">
+            <img src="images/pca.png" class="img-fluid mb-2" alt="Image 2">
+          </div>
+          <div class="col-6">
+            <img src="images/neural_network.png" class="img-fluid mb-2" alt="Image 3">
+          </div>
+          <div class="col-6">
+            <img src="images/tree.png" class="img-fluid mb-2" alt="Image 4">
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
       <!-- Project 3 -->
       <div class="col-md-4 project-card">
@@ -138,43 +155,111 @@
 
   <!-- Plotly Chart Script -->
   <script>
-    // Generate random data for the 3D plot
+    // Generate random data with a linear relationship
     var N = 100;
     var x = [];
     var y = [];
     var z = [];
-
+  
     for (var i = 0; i < N; i++) {
-      x.push(Math.random() * 10);
-      y.push(Math.random() * 10);
-      z.push(Math.random() * 10);
+      var xi = Math.random() * 10;
+      var yi = Math.random() * 10;
+      var zi = 2 * xi + 3 * yi + (Math.random() * 5); // Linear relationship with noise
+      x.push(xi);
+      y.push(yi);
+      z.push(zi);
     }
-
-    var data = [{
+  
+    // Perform linear regression to find coefficients a, b, c
+    function linearRegression3D(x, y, z) {
+      // Prepare matrices
+      var n = x.length;
+      var sumX = 0, sumY = 0, sumZ = 0;
+      var sumX2 = 0, sumY2 = 0, sumXY = 0;
+      var sumXZ = 0, sumYZ = 0;
+  
+      for (var i = 0; i < n; i++) {
+        sumX += x[i];
+        sumY += y[i];
+        sumZ += z[i];
+        sumX2 += x[i] * x[i];
+        sumY2 += y[i] * y[i];
+        sumXY += x[i] * y[i];
+        sumXZ += x[i] * z[i];
+        sumYZ += y[i] * z[i];
+      }
+  
+      var denominator = (n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY) - (n * sumXY - sumX * sumY) ** 2;
+  
+      var a_numerator = (sumZ * sumX2 - sumX * sumXZ) * (n * sumY2 - sumY * sumY) - (sumZ * sumXY - sumX * sumYZ) * (n * sumXY - sumX * sumY);
+      var b_numerator = (n * sumX2 - sumX * sumX) * (sumZ * sumY2 - sumY * sumYZ) - (n * sumXY - sumX * sumY) * (sumZ * sumXY - sumY * sumXZ);
+  
+      var a = a_numerator / denominator;
+      var b = b_numerator / denominator;
+      var c = (sumZ - a * sumX - b * sumY) / n;
+  
+      return { a: a, b: b, c: c };
+    }
+  
+    var coeffs = linearRegression3D(x, y, z);
+  
+    // Create a grid of x and y values
+    var xGrid = [];
+    var yGrid = [];
+    var zGrid = [];
+  
+    for (var xi = 0; xi <= 10; xi += 1) {
+      for (var yi = 0; yi <= 10; yi += 1) {
+        xGrid.push(xi);
+        yGrid.push(yi);
+        // Compute corresponding z values using the regression plane equation
+        zGrid.push(coeffs.a * xi + coeffs.b * yi + coeffs.c);
+      }
+    }
+  
+    // Scatter plot trace
+    var scatterTrace = {
       x: x,
       y: y,
       z: z,
       mode: 'markers',
       type: 'scatter3d',
+      name: 'Data Points',
       marker: {
         size: 5,
-        color: z,              // Set color based on z values
-        colorscale: 'Viridis', // Choose a colorscale
+        color: z,
+        colorscale: 'Viridis',
         opacity: 0.8
       }
-    }];
-
+    };
+  
+    // Regression plane trace
+    var planeTrace = {
+      x: xGrid,
+      y: yGrid,
+      z: zGrid,
+      type: 'mesh3d',
+      name: 'Regression Plane',
+      opacity: 0.5,
+      color: 'red',
+      showscale: false
+    };
+  
+    var data = [scatterTrace, planeTrace];
+  
     var layout = {
       margin: { l: 0, r: 0, b: 0, t: 0 },
       scene: {
         xaxis: { title: 'X-axis' },
         yaxis: { title: 'Y-axis' },
-        zaxis: { title: 'Z-axis' }
+        zaxis: { title: 'Z-axis' },
+        aspectmode: 'cube'
       }
     };
-
+  
     Plotly.newPlot('plotlyChart', data, layout, { responsive: true });
   </script>
+  
 
 </body>
 </html>
