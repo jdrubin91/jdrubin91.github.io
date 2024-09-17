@@ -148,7 +148,7 @@
             <h5 class="card-title">Business Intelligence</h5>
             <p class="card-text">Analyzing sales, customer insights, and operational performance through real-time data visualization, statistics, and reporting.</p>
             
-            <div id="plotlyDashboard" class="mb-3" style="height: 400px;"></div>
+            <div id="plotlyDashboard" class="mb-3" style="height: 400px; width:100%"></div>
             <!-- KPI Row (for example purposes) -->
             <div class="row text-center mb-3">
             <div class="col-4">
@@ -169,7 +169,7 @@
             <h6 class="mb-3">Progress Overview</h6>
             <p>Sales Target</p>
             <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 80%">80%</div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 80%">80%</div>
             </div>
             
             
@@ -307,7 +307,7 @@
         height: 350,
         width: 370
     };
-
+    var config = { responsive: true };
     Plotly.newPlot('plotlyDashboard', data, layout);
     </script>
   
