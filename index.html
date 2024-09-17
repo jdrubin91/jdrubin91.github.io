@@ -93,10 +93,10 @@
       <!-- Project 1 -->
       <div class="col-md-4 project-card">
         <div class="card h-100">
-          <img src="images/bioinformatic_pipeline.png" class="card-img-top img-fluid" alt="Project Image">
           <div class="card-body">
             <h5 class="card-title">Custom Bioinformatics Data Pipelines</h5>
             <p class="card-text">Automated bioinformatic pipelines with custom analyses for any sequencing technology.</p>
+            <img src="images/bioinformatic_pipeline.png" class="card-img-top img-fluid" alt="Project Image">
           </div>
         </div>
       </div>
@@ -105,6 +105,8 @@
 <div class="col-md-4 project-card">
     <div class="card h-100">
       <div class="card-body">
+        <h5 class="card-title">Predictive Machine Learning Models</h5>
+        <p class="card-text">Data processing, feature engineering, model selection, hyperparameter tuning, and evaluation.</p>
         
         <!-- Grid of Four Images -->
         <div class="row text-center">
@@ -121,8 +123,6 @@
             <img src="images/tree.png" class="img-fluid mb-2" alt="Image 4">
           </div>
 
-        <h5 class="card-title">Predictive Machine Learning Models</h5>
-        <p class="card-text">Data processing, feature engineering, model selection, hyperparameter tuning, and evaluation.</p>
         </div>
       </div>
     </div>
@@ -131,10 +131,10 @@
       <!-- Project 3 -->
       <div class="col-md-4 project-card">
         <div class="card h-100">
-          <div id="plotlyScatter" class="card-img-top" style="height: 300px;"></div>
           <div class="card-body">
             <h5 class="card-title">Data Visualizations and Statistics</h5>
             <p class="card-text">Intuitive visualizations to help understand your data. The right statistics to answer your questions.</p>
+            <div id="plotlyScatter" class="card-img-top" style="height: 300px;"></div>
           </div>
         </div>
       </div>
@@ -145,7 +145,9 @@
     <div class="col-md-4 project-card">
         <div class="card h-100">
         <div class="card-body">
-    
+            <h5 class="card-title">Business Intelligence</h5>
+            <p class="card-text">Analyzing sales, customer insights, and operational performance through real-time data visualization, statistics, and reporting.</p>
+
             <!-- KPI Row (for example purposes) -->
             <div class="row text-center mb-3">
             <div class="col-4">
@@ -153,7 +155,7 @@
                 <p class="kpi-value">$1.2M</p>
             </div>
             <div class="col-4">
-                <h6>Customer Growth</h6>
+                <h6>Growth</h6>
                 <p class="kpi-value">8.5%</p>
             </div>
             <div class="col-4">
@@ -172,9 +174,6 @@
             <!-- Placeholder for Plotly Chart -->
             <div id="plotlyDashboard" class="mb-3" style="height: 250px;"></div>
 
-            <h5 class="card-title">Business Intelligence</h5>
-            <p class="card-text">Analyzing sales, customer insights, and operational performance through real-time data visualization, statistics, and reporting.</p>
-    
         </div>
         </div>
     </div>
@@ -246,10 +245,20 @@
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
-    var data = [{
+    // Example sales data for four quarters
+    var xData = ['Q1', 'Q2', 'Q3', 'Q4'];
+    var yData = [150, 200, 300, 400];
+
+    // Calculate basic statistics: Mean and Standard Deviation
+    var meanY = yData.reduce((a, b) => a + b) / yData.length; // Calculate mean
+    var stdDevY = Math.sqrt(yData.map(y => Math.pow(y - meanY, 2)).reduce((a, b) => a + b) / yData.length); // Calculate standard deviation
+
+    // Trace for sales data
+    var traceSales = {
         type: 'bar',
-        x: ['Q1', 'Q2', 'Q3', 'Q4'],
-        y: [150, 200, 300, 400],
+        x: xData,
+        y: yData,
+        name: 'Sales',
         marker: {
         color: 'rgba(55,128,191,0.6)',
         line: {
@@ -257,12 +266,48 @@
             width: 2
         }
         }
-    }];
+    };
 
+    // Adding a linear regression trendline (simple y = mx + c formula for linear regression)
+    var trendlineY = yData.map((y, i) => (meanY + (i - 1.5) * stdDevY / 1.5));  // Simulating a trendline based on mean and deviation
+
+    var traceTrendline = {
+        type: 'scatter',
+        mode: 'lines',
+        x: xData,
+        y: trendlineY,
+        name: 'Trendline',
+        line: {
+        color: 'red',
+        width: 2,
+        dash: 'dash'
+        }
+    };
+
+    // Data array containing both sales and trendline
+    var data = [traceSales, traceTrendline];
+
+    // Layout with statistical annotations
     var layout = {
-        title: 'Quarterly Sales',
-        margin: { t: 30, l: 30, r: 30, b: 30 },
-        height: 200,
+        title: 'Quarterly Sales with Trendline',
+        annotations: [
+        {
+            xref: 'paper',
+            yref: 'paper',
+            x: 0.5,
+            y: 1.1,
+            xanchor: 'center',
+            yanchor: 'top',
+            text: `Mean: $${meanY.toFixed(2)} | Standard Deviation: $${stdDevY.toFixed(2)}`,
+            showarrow: false,
+            font: {
+            size: 12,
+            color: 'gray'
+            }
+        }
+        ],
+        margin: { t: 70, l: 50, r: 30, b: 30 },
+        height: 300,
         width: 320
     };
 
