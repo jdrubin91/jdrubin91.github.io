@@ -55,6 +55,12 @@
     .text-justify {
       text-align: justify;
     }
+
+    .kpi-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    }
   </style>
 </head>
 <body>
@@ -81,7 +87,7 @@
 
   <!-- Projects Section -->
   <section class="container mt-5">
-    <h2 class="section-title text-center">Projects</h2>
+    <h2 class="section-title text-center">Expertise</h2>
 
     <div class="row">
       <!-- Project 1 -->
@@ -125,7 +131,7 @@
       <!-- Project 3 -->
       <div class="col-md-4 project-card">
         <div class="card h-100">
-          <div id="plotlyChart" class="card-img-top" style="height: 300px;"></div>
+          <div id="plotlyScatter" class="card-img-top" style="height: 300px;"></div>
           <div class="card-body">
             <h5 class="card-title">Data Visualizations and Statistics</h5>
             <p class="card-text">Intuitive visualizations to help understand your data. The right statistics to answer your questions.</p>
@@ -133,6 +139,49 @@
         </div>
       </div>
     </div>
+
+
+    <!-- Business Intelligence Project Card -->
+    <div class="col-md-4 project-card">
+        <div class="card h-100">
+        <div class="card-body">
+    
+            <!-- KPI Row (for example purposes) -->
+            <div class="row text-center mb-3">
+            <div class="col-4">
+                <h6>Total Sales</h6>
+                <p class="kpi-value">$1.2M</p>
+            </div>
+            <div class="col-4">
+                <h6>Customer Growth</h6>
+                <p class="kpi-value">8.5%</p>
+            </div>
+            <div class="col-4">
+                <h6>Revenue</h6>
+                <p class="kpi-value">$450K</p>
+            </div>
+            </div>
+    
+            <!-- Progress Bars (example) -->
+            <h6 class="mb-3">Progress Overview</h6>
+            <p>Sales Target</p>
+            <div class="progress mb-3">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 80%">80%</div>
+            </div>
+            
+            <!-- Placeholder for Plotly Chart -->
+            <div id="plotlyDashboard" class="mb-3" style="height: 250px;"></div>
+
+            <h5 class="card-title">Business Intelligence</h5>
+            <p class="card-text">Analyzing sales, customer insights, and operational performance through real-time data visualization, statistics, and reporting.</p>
+    
+        </div>
+        </div>
+    </div>
+  
+
+
+
   </section>
 
   <!-- Contact Section -->
@@ -191,8 +240,34 @@
           }
         };
     
-        Plotly.newPlot('plotlyChart', data, layout, { responsive: true });
+        Plotly.newPlot('plotlyScatter', data, layout, { responsive: true });
       </script>
+
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+    var data = [{
+        type: 'bar',
+        x: ['Q1', 'Q2', 'Q3', 'Q4'],
+        y: [150, 200, 300, 400],
+        marker: {
+        color: 'rgba(55,128,191,0.6)',
+        line: {
+            color: 'rgba(55,128,191,1.0)',
+            width: 2
+        }
+        }
+    }];
+
+    var layout = {
+        title: 'Quarterly Sales',
+        margin: { t: 30, l: 30, r: 30, b: 30 },
+        height: 200,
+        width: 320
+    };
+
+    Plotly.newPlot('plotlyDashboard', data, layout);
+    </script>
   
 
 </body>

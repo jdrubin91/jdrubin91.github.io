@@ -18,11 +18,9 @@ digraph BioinformaticsPipeline {
         // Define nodes with soft, muted colors
         S3Input [label="1. Data Ingestion\nAmazon S3", shape=folder, fillcolor="#B0E0E6"]; // Powder Blue
         LambdaTrigger [label="2. Trigger Processing\nAWS Lambda", fillcolor="#98FB98"]; // Pale Green
-        Preprocessing [label="3. Data Preprocessing\nAWS Lambda / AWS Batch", fillcolor="#FFDAB9"]; // Peach Puff
-        Alignment [label="4. Alignment & Mapping\nAWS Batch", fillcolor="#FFDAB9"];
-        PostProcessing [label="5. Post-Alignment Processing\nAWS Batch", fillcolor="#FFDAB9"];
-        VariantCalling [label="6. Variant Calling\nAWS Batch / AWS Step Functions", fillcolor="#FFDAB9"];
-        Annotation [label="7. Annotation\nAWS Batch", fillcolor="#FFDAB9"];
+        QC [label="3. Quality Control\nAWS Batch", fillcolor="#FFDAB9"]; // Peach Puff
+        Alignment [label="3. Alignment\nAWS Batch", fillcolor="#FFDAB9"]; // Peach Puff
+        CustomBioinformatics [label="3. Custom Bioinformatics\nAWS Batch", fillcolor="#FFDAB9"]; // Peach Puff
         S3Output [label="8. Store Results\nAmazon RDS / Snowflake", shape=cylinder, fillcolor="#B0E0E6"];
         Database [label="8a. Metadata Storage\nAmazon RDS / Snowflake", shape=cylinder, fillcolor="#E6E6FA"]; // Lavender
         Visualization [label="9. Data Visualization\nCustom Python/HTML", fillcolor="#FFE4E1"]; // Misty Rose
@@ -31,22 +29,18 @@ digraph BioinformaticsPipeline {
     
     // Define edges
     S3Input -> LambdaTrigger;
-    LambdaTrigger -> Preprocessing;
-    Preprocessing -> Alignment;
-    Alignment -> PostProcessing;
-    PostProcessing -> VariantCalling;
-    VariantCalling -> Annotation;
-    Annotation -> S3Output;
-    Annotation -> Database;
+    LambdaTrigger -> QC;
+    QC -> Alignment;
+    Alignment -> CustomBioinformatics;
+    CustomBioinformatics -> S3Output;
+    CustomBioinformatics -> Database;
 
     // Branch to Visualization
     S3Output -> Visualization [style=dashed];
     Database -> Visualization [style=dashed];
 
     // Notifications and Monitoring
-    Annotation -> Notifications [style=dotted];
-    VariantCalling -> Notifications [style=dotted];
-    Preprocessing -> Notifications [style=dotted];
+    QC -> Notifications [style=dotted];
     Alignment -> Notifications [style=dotted];
-    PostProcessing -> Notifications [style=dotted];
+    CustomBioinformatics -> Notifications [style=dotted];
 }
