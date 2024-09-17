@@ -267,7 +267,7 @@
     };
 
     // Adding a linear regression trendline (simple y = mx + c formula for linear regression)
-    var trendlineY = yData.map((y, i) => (meanY + (i - 1.5) * stdDevY / 1.5));  // Simulating a trendline based on mean and deviation
+    var trendlineY = yData.map((y, i) => (meanY + (i - 1.5) * stdDevY / 1.5).toFixed(2));  // Simulating a trendline based on mean and deviation
 
     var traceTrendline = {
         type: 'scatter',
