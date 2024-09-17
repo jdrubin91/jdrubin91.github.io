@@ -8,14 +8,14 @@ from sklearn.datasets import make_blobs
 
 # Generate synthetic clusterable data using make_blobs
 # 4 clusters, 30 samples, 10 features
-data, cluster_labels = make_blobs(n_samples=30, n_features=10, centers=4, cluster_std=1.5, random_state=42)
+data, cluster_labels = make_blobs(n_samples=20, n_features=10, centers=4, cluster_std=1.5, random_state=42)
 
 # Calculate the distance matrix and apply hierarchical clustering
 row_linkage = linkage(pdist(data, metric='euclidean'), method='average')
 col_linkage = linkage(pdist(data.T, metric='euclidean'), method='average')
 
 # Set up the matplotlib figure with gridspec
-fig = plt.figure(figsize=(10, 10))
+fig = plt.figure(figsize=(10, 6))
 gs = gridspec.GridSpec(3, 3, width_ratios=[0.2, 1, 0.05], height_ratios=[0.2, 1, 0.05])
 
 # Create axes for the row and column dendrograms, the heatmap, and the color bar

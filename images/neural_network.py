@@ -63,4 +63,4 @@ layer_colors = ['gold', 'plum', 'lightgreen', 'lightgreen', 'lightcoral', 'skybl
 
 draw_neural_network(ax, layer_sizes, layer_colors)
 
-plt.savefig('neural_network.png')
+plt.savefig('neural_network.png', bbox_inches='tight', pad_inches = 0)
