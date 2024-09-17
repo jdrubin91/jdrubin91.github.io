@@ -177,6 +177,10 @@
         </div>
         </div>
     </div>
+
+    <!-- Statistics Card -->
+
+    <!-- Signal Processing Card -->
   
   </section>
 
@@ -238,6 +242,38 @@
         };
     
         Plotly.newPlot('plotlyScatter', data, layout);
+
+        // Function to rotate the plot around the z-axis
+        var angle = 0;
+        var rotating = true;  // Flag to stop the rotation on user interaction
+
+        function rotate() {
+            if (!rotating) return;  // Stop the rotation if the user interacted with the plot
+            angle += 0.01;  // Adjust this value to control the rotation speed
+
+            var camera = {
+            eye: {
+                x: 1.5 * Math.cos(angle),
+                y: 1.5 * Math.sin(angle),
+                z: 1.25
+            }
+            };
+
+            Plotly.relayout('plotlyScatter', {
+            'scene.camera': camera
+            });
+
+            requestAnimationFrame(rotate);  // Continue rotating
+        }
+
+        // Start the rotation
+        rotate();
+
+        // Stop the rotation when the user interacts with the plot
+        var plotlyElement = document.getElementById('plotlyScatter');
+        plotlyElement.on('plotly_click', function() {
+            rotating = false;
+        });
       </script>
 
 
