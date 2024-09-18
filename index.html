@@ -22,8 +22,12 @@
       background-color: #f8f9fa;
     }
     .header {
-      background-color: #343a40;
-      color: white;
+      background-image: url('images/header.png');
+      background-size: cover;       /* Ensure the background covers the entire header */
+      background-position: center;  /* Center the image */
+      background-repeat: no-repeat; /* Prevent repeating */
+      /* background-color: #343a40; */
+      /* color: white; */
       padding: 50px 0;
       text-align: center;
     }
@@ -90,98 +94,100 @@
     <h2 class="section-title text-center">Expertise</h2>
 
     <div class="row">
-      <!-- Project 1 -->
-      <div class="col-md-4 project-card">
+      
+
+      <!-- ML -->
+    <div class="col-md-4 project-card">
         <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Custom Bioinformatics Data Pipelines</h5>
-            <p class="card-text">Automated bioinformatic pipelines with custom analyses for any sequencing technology.</p>
-            <img src="images/bioinformatic_pipeline.png" class="card-img-top img-fluid" alt="Project Image">
-          </div>
-        </div>
-      </div>
+        <div class="card-body">
+            <h5 class="card-title">Machine Learning Models</h5>
+            <p class="card-text">Data processing, feature engineering, model selection, hyperparameter tuning, and evaluation.</p>
+            
+            <!-- Grid of Two Images -->
+            <div class="row text-center">
+            <div class="col-6" style="width: 100%">
+                <img src="images/hirearchichal.png" class="img-fluid mb-2" alt="Clustering">
+            </div>
+            <div class="col-6" style="width: 100%">
+                <img src="images/neural_network.png" class="img-fluid mb-2" alt="Neural Network">
+            </div>
 
-      <!-- Project 2 -->
-<div class="col-md-4 project-card">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Predictive Machine Learning Models</h5>
-        <p class="card-text">Data processing, feature engineering, model selection, hyperparameter tuning, and evaluation.</p>
-        
-        <!-- Grid of Four Images -->
-        <div class="row text-center">
-          <div class="col-6" style="width: 100%">
-            <img src="images/hirearchichal.png" class="img-fluid mb-2" alt="Clustering">
-          </div>
-          <!-- <div class="col-6">
-            <img src="images/pca.png" class="img-fluid mb-2" alt="PCA">
-          </div> -->
-          <div class="col-6" style="width: 100%">
-            <img src="images/neural_network.png" class="img-fluid mb-2" alt="Neural Network">
-          </div>
-          <!-- <div class="col-6">
-            <img src="images/tree.png" class="img-fluid mb-2" alt="Decision Tree">
-          </div> -->
-
+            </div>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
 
-      <!-- Project 3 -->
+
+    <!-- Statistics Card -->
+    <div class="col-md-4 project-card">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Statistics</h5>
+            <p class="card-text">The right statistics to answer your questions.</p>
+            <!-- <div id="plotlyScatter" class="card-img-top" style="width: 100%"></div> -->
+          </div>
+        </div>
+      </div>
+    
+
+      <!-- Data Viz -->
       <div class="col-md-4 project-card">
         <div class="card h-100">
           <div class="card-body">
-            <h5 class="card-title">Data Visualizations and Statistics</h5>
-            <p class="card-text">Intuitive visualizations to help understand your data. The right statistics to answer your questions.</p>
+            <h5 class="card-title">Data Visualizations</h5>
+            <p class="card-text">Intuitive visualizations to help understand your data.</p>
             <div id="plotlyScatter" class="card-img-top" style="width: 100%"></div>
           </div>
         </div>
       </div>
     </div>
 
+    <div class="row">
+    <!-- Bioinformatics -->
+      <div class="col-md-4 project-card">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Bioinformatic Data Pipelines</h5>
+            <p class="card-text">Automated bioinformatic pipelines with custom analyses for any sequencing technology.</p>
+            <img src="images/bioinformatic_pipeline.png" class="card-img-top img-fluid" alt="Project Image">
+          </div>
+        </div>
+      </div>
+
+    <!-- Signal Processing Card -->
+    <div class="col-md-4 project-card">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Signal Processing</h5>
+                <p class="card-text">Extract information from complex signals.</p>
+                
+                <div id="compoundSignalPlot" class="mb-3" style="width: 100%"></div>
+                <div id="componentSignalPlot" class="mb-3" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Business Intelligence Project Card -->
     <div class="col-md-4 project-card">
         <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">Business Intelligence</h5>
-            <p class="card-text">Analyzing sales, customer insights, and operational performance through real-time data visualization, statistics, and reporting.</p>
-            
-            <div id="plotlyDashboard" class="mb-3" style="width:100%"></div>
+            <div class="card-body">
+                <h5 class="card-title">Business Intelligence</h5>
+                <p class="card-text">Analyze sales, customer insights, and operational performance through data visualization, statistics, and ML.</p>
+                
+                <div id="plotlyDashboard" class="mb-3" style="width:100%"></div>
 
-            <!-- Progress Bars (example) -->
-            <p>Sales Target</p>
-            <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                <!-- Progress Bars (example) -->
+                <p>Sales Target</p>
+                <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 80%">80%</div>
+                </div>
             </div>
-            
-
-            <!-- KPI Row (for example purposes) -->
-            <!-- <div class="row text-center mb-3">
-            <div class="col-4">
-                <h6>Total Sales</h6>
-                <p class="kpi-value">$1.2M</p>
-            </div>
-            <div class="col-4">
-                <h6>Growth</h6>
-                <p class="kpi-value">8.5%</p>
-            </div>
-            <div class="col-4">
-                <h6>Revenue</h6>
-                <p class="kpi-value">$450K</p>
-            </div> -->
-        </div>
-            
-
-        </div>
         </div>
     </div>
 
-    <!-- Statistics Card -->
 
-    <!-- Signal Processing Card -->
-  
+    </div>
+    
   </section>
 
   <!-- Contact Section -->
@@ -203,7 +209,7 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Plotly Chart Script -->
+
     <script>
         // Generate random data for the 3D plot
         var N = 100;
@@ -234,9 +240,9 @@
         var layout = {
           margin: { l: 0, r: 0, b: 0, t: 0 },
           scene: {
-            xaxis: { title: 'X-axis' },
-            yaxis: { title: 'Y-axis' },
-            zaxis: { title: 'Z-axis' }
+            xaxis: { title: '', showticklabels: false },
+            yaxis: { title: '', showticklabels: false },
+            zaxis: { title: '', showticklabels: false }
           },
           responsive: true
         };
@@ -255,7 +261,7 @@
             eye: {
                 x: 1.5 * Math.cos(angle),
                 y: 1.5 * Math.sin(angle),
-                z: 1.25
+                z: 0.1
             }
             };
 
@@ -274,13 +280,8 @@
         plotlyElement.on('plotly_click', function() {
             rotating = false;
         });
-        plotlyElement.on('plotly_hover', function() {
-            rotating = false;
-        });
       </script>
 
-
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
     // Example sales data for four quarters
     var xData = ['Q1', 'Q2', 'Q3', 'Q4'];
@@ -348,6 +349,226 @@
         margin: { t: 70, l: 30, r: 30, b: 20 }
     };
     Plotly.newPlot('plotlyDashboard', data, layout);
+    </script>
+
+    <script>
+    // Sampling parameters
+    const sampling_rate = 1000;
+    const t = Array.from({length: sampling_rate}, (_, i) => i / sampling_rate);
+
+    // Low-frequency signal (5 Hz)
+    const low_freq = 5;
+    const low_signal = t.map(time => Math.sin(2 * Math.PI * low_freq * time));
+
+    // High-frequency signal (50 Hz)
+    const high_freq = 50;
+    const high_signal = t.map(time => 0.5 * Math.sin(2 * Math.PI * high_freq * time));
+
+    // Combined signal
+    const combined_signal = low_signal.map((value, index) => value + high_signal[index]);
+
+    // Frames for animation
+    const frames = [];
+    const num_frames = 100; // Total frames in the animation
+
+    for (let i = 1; i <= num_frames; i++) {
+        const step = Math.floor(i * sampling_rate / num_frames);
+        frames.push({
+            name: `frame${i}`,
+            data: [
+                { x: t.slice(0, step), y: low_signal.slice(0, step), mode: 'lines', name: 'Low Frequency Signal' },
+                { x: t.slice(0, step), y: high_signal.slice(0, step), mode: 'lines', name: 'High Frequency Signal' },
+                { x: t.slice(0, step), y: combined_signal.slice(0, step), mode: 'lines', name: 'Combined Signal' }
+            ]
+        });
+    }
+
+    // Initial empty traces for the plot
+    const trace1 = {
+        x: [],
+        y: [],
+        mode: 'lines',
+        name: 'Low Frequency Signal',
+        line: {color: 'blue'}
+    };
+
+    const trace2 = {
+        x: [],
+        y: [],
+        mode: 'lines',
+        name: 'High Frequency Signal',
+        line: {color: 'red'}
+    };
+
+    const trace3 = {
+        x: [],
+        y: [],
+        mode: 'lines',
+        name: 'Combined Signal',
+        line: {color: 'green'}
+    };
+
+    // Plot layout
+    const layout = {
+        title: 'Animated High and Low Frequency Signal Combination',
+        height: 800,
+        width: 900,
+        xaxis: { title: 'Time (s)' },
+        yaxis: { title: 'Amplitude' },
+        updatemenus: [{
+            type: 'buttons',
+            showactive: false,
+            buttons: [{
+                label: 'Play',
+                method: 'animate',
+                args: [null, {
+                    fromcurrent: true,
+                    frame: { redraw: true, duration: 50 },
+                    transition: { duration: 0 }
+                }]
+            }, {
+                label: 'Pause',
+                method: 'animate',
+                args: [[null], {
+                    mode: 'immediate',
+                    frame: { redraw: true, duration: 0 },
+                    transition: { duration: 0 }
+                }]
+            }]
+        }]
+    };
+
+    // Initial plot
+    Plotly.newPlot('plot', [trace1, trace2, trace3], layout);
+
+    // Add frames for animation
+    Plotly.addFrames('plot', frames);
+
+</script>
+
+    <script>// Time values for both the compound and component signals
+        var x = [];
+        for (var i = 0; i < 100; i++) {
+          x.push(i * 0.1);
+        }
+        
+        // Initial signals (before animation)
+        var signal1 = x.map(function(val) {
+          return Math.sin(val);
+        });
+        var signal2 = x.map(function(val) {
+          return 0.5 * Math.sin(10 * val);
+        });
+        var compoundSignal = x.map(function(val, i) {
+          return signal1[i] + signal2[i];
+        });
+        
+        // Plot the component signals
+        var traceSignal1 = {
+          x: x,
+          y: signal1,
+          mode: 'lines',
+          line: { color: 'green' },
+          name: 'Component Signal 1',
+          type: 'scatter'
+        };
+        var traceSignal2 = {
+          x: x,
+          y: signal2,
+          mode: 'lines',
+          line: { color: 'red' },
+          name: 'Component Signal 2',
+          type: 'scatter'
+        };
+        
+        // Plot the compound signal
+        var traceCompound = {
+          x: x,
+          y: compoundSignal,
+          mode: 'lines',
+          line: { color: 'blue' },
+          name: 'Compound Signal',
+          type: 'scatter'
+        };
+        
+        // Layout for the plots
+        var layoutCompound = {
+          title: '',
+          xaxis: { title: '' },
+          yaxis: { title: '', range: [-1.7, 1.7] },
+          margin: { l: 35, r: 10, t: 0, b: 30 },
+          height: 300,
+          autosize: true
+        };
+        
+        var layoutComponents = {
+          title: '',
+          xaxis: { title: 'Time' },
+          yaxis: { title: '', range: [-1.7, 1.7] },
+          showlegend: false,  // Turn off the legend
+          margin: { l: 35, r: 10, t: 0, b: 30 },
+          height: 300,
+          autosize: true
+        };
+        
+        // Render the initial plots
+        // Render both component signals on the same plot (same time scale)
+        Plotly.newPlot('componentSignalPlot', [traceSignal1, traceSignal2], layoutComponents);
+        Plotly.newPlot('compoundSignalPlot', [traceCompound], layoutCompound);
+        
+        // Animate the component and compound signals
+        var phase = 0;
+        var phase2 = 0;
+        function animateSignals() {
+          phase += 0.1;
+          phase2 += 1
+        
+          // Update the component signals with phase shift
+          var newSignal1 = x.map(function(val) {
+            return Math.sin(val + phase);
+          });
+          var newSignal2 = x.map(function(val) {
+            return 0.5 * Math.sin(10 * val + phase2);
+          });
+          var newCompoundSignal = x.map(function(val, i) {
+            return newSignal1[i] + newSignal2[i];
+          });
+        
+          // Update the component signals plot (same time scale)
+          Plotly.animate('componentSignalPlot', {
+            data: [
+              { y: newSignal1 },  // Update signal1
+              { y: newSignal2 }   // Update signal2
+            ]
+          }, {
+            transition: {
+              duration: 0
+            },
+            frame: {
+              duration: 50,
+              redraw: true
+            }
+          });
+        
+          // Update the compound signal plot
+          Plotly.animate('compoundSignalPlot', {
+            data: [{ y: newCompoundSignal }]
+          }, {
+            transition: {
+              duration: 0
+            },
+            frame: {
+              duration: 50,
+              redraw: true
+            }
+          });
+        
+          // Keep animating
+          requestAnimationFrame(animateSignals);
+        }
+        
+        // Start the animation
+        animateSignals();
     </script>
   
 

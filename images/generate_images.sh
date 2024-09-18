@@ -13,3 +13,8 @@ for file in *.dot; do
 
   echo "Generated ${filename}.png from ${file}"
 done
+
+# Loop through all .py files in the current directory
+for file in *.py; do
+  python3 $file
+done
