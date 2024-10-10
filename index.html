@@ -22,14 +22,14 @@
       background-color: #f8f9fa;
     }
     .header {
-      background-image: url('images/header.png');
-      background-size: cover;       /* Ensure the background covers the entire header */
-      background-position: center;  /* Center the image */
-      background-repeat: no-repeat; /* Prevent repeating */
-      /* background-color: #343a40; */
-      /* color: white; */
-      padding: 50px 0;
-      text-align: center;
+        background-image: url('images/header.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 50px 0;
+        text-align: center;
+        position: relative; /* Ensure z-index applies */
+        z-index: 1; /* Make sure it's on top */ 
     }
     /* Adjust header padding on small screens */
     @media (max-width: 576px) {
@@ -58,6 +58,19 @@
     /* Custom class to justify text */
     .text-justify {
       text-align: justify;
+    }
+
+    @media (max-width: 768px) {
+    .fade-section {
+        transform: translateY(30px); /* Reduce the vertical movement for mobile */
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Faster transition */
+    }
+}
+
+    /* Show the rows when they are fully visible */
+    .visible {
+        opacity: 1;
+        transform: translateY(0); 
     }
 
     .kpi-value {
@@ -89,19 +102,50 @@
   </section>
   
 
-  <!-- Projects Section -->
+  <!-- Expertise Section -->
   <section class="container mt-5">
+
+    <div class="row fade-section">
+
     <h2 class="section-title text-center">Expertise</h2>
 
-    <div class="row">
+    <!-- Data Viz -->
+    <div class="col-md-4 project-card">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Data Visualization</h5>
+            <p class="card-text">Intuitive visualizations to help understand your data.</p>
+            <div id="plotlyScatter" class="card-img-top" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Statistics Card -->
+    <div class="col-md-4 project-card">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Statistics</h5>
+            <p class="card-text">The right statistics to answer your questions.</p>
+            <div class="row text-center">
+                <div class="col-6" style="width: 100%">
+                    <img src="images/pval.png" class="img-fluid mb-2" alt="Clustering">
+                </div>
+                <div class="col-6" style="width: 100%">
+                    <img src="images/neural_network.png" class="img-fluid mb-2" alt="Neural Network">
+                </div>
+    
+                </div>
+          </div>
+        </div>
+      </div>
       
 
       <!-- ML -->
     <div class="col-md-4 project-card">
         <div class="card h-100">
         <div class="card-body">
-            <h5 class="card-title">Machine Learning Models</h5>
-            <p class="card-text">Data processing, feature engineering, model selection, hyperparameter tuning, and evaluation.</p>
+            <h5 class="card-title">Machine Learning</h5>
+            <p class="card-text">Advanced models to derive actionable insights.</p>
             
             <!-- Grid of Two Images -->
             <div class="row text-center">
@@ -116,35 +160,16 @@
         </div>
         </div>
     </div>
-
-
-    <!-- Statistics Card -->
-    <div class="col-md-4 project-card">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Statistics</h5>
-            <p class="card-text">The right statistics to answer your questions.</p>
-            <!-- <div id="plotlyScatter" class="card-img-top" style="width: 100%"></div> -->
-          </div>
-        </div>
-      </div>
+   
     
-
-      <!-- Data Viz -->
-      <div class="col-md-4 project-card">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Data Visualizations</h5>
-            <p class="card-text">Intuitive visualizations to help understand your data.</p>
-            <div id="plotlyScatter" class="card-img-top" style="width: 100%"></div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <div class="row">
+    <div class="row fade-section">
+
+    <h2 class="section-title text-center">Example projects</h2>
+
     <!-- Bioinformatics -->
-      <div class="col-md-4 project-card">
+    <div class="col-md-4 project-card">
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">Bioinformatic Data Pipelines</h5>
@@ -172,7 +197,7 @@
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Business Intelligence</h5>
-                <p class="card-text">Analyze sales, customer insights, and operational performance through data visualization, statistics, and ML.</p>
+                <p class="card-text">Analyze sales, customer insights, and operational performance.</p>
                 
                 <div id="plotlyDashboard" class="mb-3" style="width:100%"></div>
 
@@ -198,6 +223,7 @@
     <div class="text-center">
       <a href="mailto:jd.rubin91@gmail.com" class="btn btn-success">Email Me</a>
       <a href="https://www.linkedin.com/in/jonathan-d-rubin/" class="btn btn-info" target="_blank">LinkedIn</a>
+      <p></p>
     </div>
   </section>
 
@@ -222,6 +248,20 @@
           y.push(Math.random() * 10);
           z.push(Math.random() * 10);
         }
+        
+
+        var cx = [];
+        var cy = [];
+        var cz = [];
+        // Generate a small cluster of points around a specific location (e.g., near [5, 5, 5])
+        var clusterSize = 30;  // Size of the cluster
+        var clusterCenter = [7, 7, 7];  // Center of the cluster
+        for (var i = 0; i < clusterSize; i++) {
+          // Points around the cluster center, with a small random offset
+          cx.push(clusterCenter[0] + Math.random() * 0.75);
+          cy.push(clusterCenter[1] + Math.random() * 0.75);
+          cz.push(clusterCenter[2] + Math.random() * 0.75);
+        }
     
         var data = [{
           x: x,
@@ -229,16 +269,32 @@
           z: z,
           mode: 'markers',
           type: 'scatter3d',
+          name: 'background',
           marker: {
             size: 5,
             color: z,              // Set color based on z values
             colorscale: 'Viridis', // Choose a colorscale
             opacity: 0.8
           }
-        }];
+        },
+        {
+          x: cx,
+          y: cy,
+          z: cz,
+          mode: 'markers',
+          type: 'scatter3d',
+          name: 'signal',
+          marker: {
+            size: 5,
+            color: 'red',
+            opacity: 0.8
+          }
+        }
+    ];
     
         var layout = {
           margin: { l: 0, r: 0, b: 0, t: 0 },
+          showlegend: false,  // Turn off the legend
           scene: {
             xaxis: { title: '', showticklabels: false },
             yaxis: { title: '', showticklabels: false },
@@ -246,8 +302,16 @@
           },
           responsive: true
         };
+
+        var config = {
+        displayModeBar: false,  // Disable the mode bar (toolbar)
+        scrollZoom: false,      // Disable scroll-to-zoom
+        doubleClick: false,     // Disable double-click to reset
+        showTips: true,         // Enable hover functionality
+        staticPlot: false       // Keep interactivity enabled for hover
+        };
     
-        Plotly.newPlot('plotlyScatter', data, layout);
+        Plotly.newPlot('plotlyScatter', data, layout, config);
 
         // Function to rotate the plot around the z-axis
         var angle = 0;
@@ -275,9 +339,9 @@
         // Start the rotation
         rotate();
 
-        // Stop the rotation when the user interacts with the plot
+        // Stop the rotation when the user interacts with the plot (click anywhere)
         var plotlyElement = document.getElementById('plotlyScatter');
-        plotlyElement.on('plotly_click', function() {
+        plotlyElement.addEventListener('mousedown', function() {
             rotating = false;
         });
       </script>
@@ -348,103 +412,8 @@
         responsive: true,
         margin: { t: 70, l: 30, r: 30, b: 20 }
     };
-    Plotly.newPlot('plotlyDashboard', data, layout);
+    Plotly.newPlot('plotlyDashboard', data, layout, { staticPlot: true });
     </script>
-
-    <script>
-    // Sampling parameters
-    const sampling_rate = 1000;
-    const t = Array.from({length: sampling_rate}, (_, i) => i / sampling_rate);
-
-    // Low-frequency signal (5 Hz)
-    const low_freq = 5;
-    const low_signal = t.map(time => Math.sin(2 * Math.PI * low_freq * time));
-
-    // High-frequency signal (50 Hz)
-    const high_freq = 50;
-    const high_signal = t.map(time => 0.5 * Math.sin(2 * Math.PI * high_freq * time));
-
-    // Combined signal
-    const combined_signal = low_signal.map((value, index) => value + high_signal[index]);
-
-    // Frames for animation
-    const frames = [];
-    const num_frames = 100; // Total frames in the animation
-
-    for (let i = 1; i <= num_frames; i++) {
-        const step = Math.floor(i * sampling_rate / num_frames);
-        frames.push({
-            name: `frame${i}`,
-            data: [
-                { x: t.slice(0, step), y: low_signal.slice(0, step), mode: 'lines', name: 'Low Frequency Signal' },
-                { x: t.slice(0, step), y: high_signal.slice(0, step), mode: 'lines', name: 'High Frequency Signal' },
-                { x: t.slice(0, step), y: combined_signal.slice(0, step), mode: 'lines', name: 'Combined Signal' }
-            ]
-        });
-    }
-
-    // Initial empty traces for the plot
-    const trace1 = {
-        x: [],
-        y: [],
-        mode: 'lines',
-        name: 'Low Frequency Signal',
-        line: {color: 'blue'}
-    };
-
-    const trace2 = {
-        x: [],
-        y: [],
-        mode: 'lines',
-        name: 'High Frequency Signal',
-        line: {color: 'red'}
-    };
-
-    const trace3 = {
-        x: [],
-        y: [],
-        mode: 'lines',
-        name: 'Combined Signal',
-        line: {color: 'green'}
-    };
-
-    // Plot layout
-    const layout = {
-        title: 'Animated High and Low Frequency Signal Combination',
-        height: 800,
-        width: 900,
-        xaxis: { title: 'Time (s)' },
-        yaxis: { title: 'Amplitude' },
-        updatemenus: [{
-            type: 'buttons',
-            showactive: false,
-            buttons: [{
-                label: 'Play',
-                method: 'animate',
-                args: [null, {
-                    fromcurrent: true,
-                    frame: { redraw: true, duration: 50 },
-                    transition: { duration: 0 }
-                }]
-            }, {
-                label: 'Pause',
-                method: 'animate',
-                args: [[null], {
-                    mode: 'immediate',
-                    frame: { redraw: true, duration: 0 },
-                    transition: { duration: 0 }
-                }]
-            }]
-        }]
-    };
-
-    // Initial plot
-    Plotly.newPlot('plot', [trace1, trace2, trace3], layout);
-
-    // Add frames for animation
-    Plotly.addFrames('plot', frames);
-
-</script>
 
     <script>// Time values for both the compound and component signals
         var x = [];
@@ -513,8 +482,8 @@
         
         // Render the initial plots
         // Render both component signals on the same plot (same time scale)
-        Plotly.newPlot('componentSignalPlot', [traceSignal1, traceSignal2], layoutComponents);
-        Plotly.newPlot('compoundSignalPlot', [traceCompound], layoutCompound);
+        Plotly.newPlot('componentSignalPlot', [traceSignal1, traceSignal2], layoutComponents, { staticPlot: true });
+        Plotly.newPlot('compoundSignalPlot', [traceCompound], layoutCompound, { staticPlot: true });
         
         // Animate the component and compound signals
         var phase = 0;
@@ -570,6 +539,69 @@
         // Start the animation
         animateSignals();
     </script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.fade-section');
+
+        // Debounce function to reduce scroll event firing frequency
+        function debounce(func, wait = 20, immediate = true) {
+            let timeout;
+            return function() {
+                let context = this, args = arguments;
+                let later = function() {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                let callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        }
+    
+        function handleScroll() {
+            const windowHeight = window.innerHeight;
+    
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect(); // Get the position of the section
+    
+                // Calculate how much of the section is visible
+                let sectionTop = rect.top;
+                let sectionBottom = rect.bottom;
+                let sectionHeight = rect.height;
+
+                // Adjust for smoother fade-out when the element is entering or leaving the viewport
+                let visibleRatio;
+    
+                if (sectionTop > windowHeight) {
+                    // Section is fully below the viewport
+                    visibleRatio = 0;
+                } else if (sectionBottom < 0) {
+                    // Section is fully above the viewport
+                    visibleRatio = 0;
+                } else {
+                    // Section is in view, calculate the visible ratio
+                    let distanceToTop = Math.min(sectionHeight, windowHeight - sectionTop);
+                    visibleRatio = distanceToTop / sectionHeight;
+                }
+    
+                // Apply the visible ratio to opacity and transform for smooth fading
+                section.style.opacity = visibleRatio;
+                section.style.transform = `translateY(${(1 - visibleRatio) * 20}px)`; // Move up/down more smoothly
+            });
+        }
+    
+        // Run on initial load
+        handleScroll();
+    
+        // Attach debounced scroll event to window for better performance
+        window.addEventListener('scroll', debounce(handleScroll));
+    });
+</script>
+
+
+    
   
 
 </body>
