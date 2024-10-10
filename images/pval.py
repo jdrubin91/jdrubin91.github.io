@@ -43,7 +43,7 @@ ax.text(sample-0.1, 0.05, f'p-value = {p_value:.2f}', color='red', fontsize=12, 
 # ax.title('Normal Distribution with Sample Leading to p-value < 0.01 and 95% Confidence Interval')
 ax.set_xlabel('Value')
 ax.set_ylabel('Probability Density')
-ax.legend()
+# ax.legend()
 ax.spines[['right', 'top']].set_visible(False)
 
 # Show the plot

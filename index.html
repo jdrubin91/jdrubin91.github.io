@@ -60,23 +60,21 @@
       text-align: justify;
     }
 
-    @media (max-width: 768px) {
-    .fade-section {
-        transform: translateY(30px); /* Reduce the vertical movement for mobile */
-        transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Faster transition */
-    }
-}
-
-    /* Show the rows when they are fully visible */
-    .visible {
-        opacity: 1;
-        transform: translateY(0); 
-    }
-
     .kpi-value {
     font-size: 1.5rem;
     font-weight: bold;
     color: #007bff;
+    }
+
+    /* CSS to control the indentation of list items */
+    ol {
+        list-style-position: inside;  /* Ensures the bullet/number is inside the list box */
+        padding-left: 1.5em;          /* Padding to give space for the number */
+    }
+    
+    ol li {
+        text-indent: -1.5em;          /* Indent text to align with the bullet */
+        padding-left: 1.5em;          /* Padding for the content to align under the bullet */
     }
   </style>
 </head>
@@ -105,7 +103,7 @@
   <!-- Expertise Section -->
   <section class="container mt-5">
 
-    <div class="row fade-section">
+    <div class="row">
 
     <h2 class="section-title text-center">Expertise</h2>
 
@@ -128,10 +126,10 @@
             <p class="card-text">The right statistics to answer your questions.</p>
             <div class="row text-center">
                 <div class="col-6" style="width: 100%">
-                    <img src="images/pval.png" class="img-fluid mb-2" alt="Clustering">
+                    <img src="images/pval.png" class="img-fluid mb-2" alt="P-Value">
                 </div>
                 <div class="col-6" style="width: 100%">
-                    <img src="images/neural_network.png" class="img-fluid mb-2" alt="Neural Network">
+                    <img src="images/linreg.png" class="img-fluid mb-2" alt="Linear Regression">
                 </div>
     
                 </div>
@@ -164,54 +162,64 @@
     
     </div>
 
-    <div class="row fade-section">
+    <div class="row">
 
     <h2 class="section-title text-center">Example projects</h2>
 
-    <!-- Bioinformatics -->
-    <div class="col-md-4 project-card">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Bioinformatic Data Pipelines</h5>
-            <p class="card-text">Automated bioinformatic pipelines with custom analyses for any sequencing technology.</p>
-            <img src="images/bioinformatic_pipeline.png" class="card-img-top img-fluid" alt="Project Image">
-          </div>
-        </div>
-      </div>
-
-    <!-- Signal Processing Card -->
-    <div class="col-md-4 project-card">
-        <div class="card h-100">
+        <!-- Bioinformatics -->
+        <div class="col-md-4 project-card">
+            <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title">Signal Processing</h5>
-                <p class="card-text">Extract information from complex signals.</p>
-                
-                <div id="compoundSignalPlot" class="mb-3" style="width: 100%"></div>
-                <div id="componentSignalPlot" class="mb-3" style="width: 100%"></div>
+                <h5 class="card-title">Bioinformatic Data Pipelines</h5>
+                <p class="card-text">Automated bioinformatic pipelines with custom analyses for any sequencing technology.</p>
+                <img src="images/bioinformatic_pipeline.png" class="card-img-top img-fluid" alt="Project Image">
+            </div>
             </div>
         </div>
-    </div>
 
-    <!-- Business Intelligence Project Card -->
-    <div class="col-md-4 project-card">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">Business Intelligence</h5>
-                <p class="card-text">Analyze sales, customer insights, and operational performance.</p>
-                
-                <div id="plotlyDashboard" class="mb-3" style="width:100%"></div>
+        <!-- Signal Processing Card -->
+        <div class="col-md-4 project-card">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Signal Processing</h5>
+                    <p class="card-text">Extract information from complex signals.</p>
+                    
+                    <div id="compoundSignalPlot" class="mb-3" style="width: 100%"></div>
+                    <div id="componentSignalPlot" class="mb-3" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
 
-                <!-- Progress Bars (example) -->
-                <p>Sales Target</p>
-                <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 80%">80%</div>
+        <!-- Business Intelligence Project Card -->
+        <div class="col-md-4 project-card">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Business Intelligence</h5>
+                    <p class="card-text">Analyze sales, customer insights, and operational performance.</p>
+                    
+                    <div id="plotlyDashboard" class="mb-3" style="width:100%"></div>
+
+                    <!-- Progress Bars (example) -->
+                    <p>Sales Target</p>
+                    <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 80%">80%</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
+    <div class="row">
+        <div>
+            <h3>Publications</h3>
+            <p id="citation-count">Over <strong>300</strong> citations, <a href="https://scholar.google.com/citations?user=yMGaQUoAAAAJ" target="_blank">
+                view my publications and citations on Google Scholar
+            </a></p>
+            <ol id="publications"></ol>
+        </div>
+        
+        
     </div>
+
     
   </section>
 
@@ -323,8 +331,8 @@
 
             var camera = {
             eye: {
-                x: 1.5 * Math.cos(angle),
-                y: 1.5 * Math.sin(angle),
+                x: 2 * Math.cos(angle),
+                y: 2 * Math.sin(angle),
                 z: 0.1
             }
             };
@@ -599,10 +607,46 @@
         window.addEventListener('scroll', debounce(handleScroll));
     });
 </script>
+<script>
+    const orcidId = '0000-0003-1129-2910'; // Replace with your ORCID ID
+    const url = `https://pub.orcid.org/v3.0/${orcidId}/works`;
 
+    fetch(url, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const works = data.group;
+        const publicationsDiv = document.getElementById('publications');
 
-    
-  
+        // Loop through works and display title, year, journal, and DOI (if available)
+        works.forEach((work, index) => {
+            const title = work['work-summary'][0].title.title.value;
+            const publicationYear = work['work-summary'][0]['publication-date']?.year?.value || 'No year available';
+            const journal = work['work-summary'][0]['journal-title']?.value || 'No journal available';
+            
+            // Find the DOI in the external identifiers
+            let doi = 'No DOI available';  // Default if no DOI
+            const identifiers = work['work-summary'][0]['external-ids']['external-id'];
+            identifiers.forEach(identifier => {
+                if (identifier['external-id-type'] === 'doi') {
+                    doi = identifier['external-id-value'];
+                }
+            });
+
+            // Create an ordered list item for each work
+            const citation = document.createElement('li');
+            citation.innerHTML = `<strong>${title}</strong> (${publicationYear}), ${journal}, DOI: ${doi !== 'No DOI available' ? `<a href="https://doi.org/${doi}" target="_blank">${doi}</a>` : doi}`;
+            publicationsDiv.appendChild(citation);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching ORCID data:', error);
+    });
+</script>
+
 
 </body>
 </html>
