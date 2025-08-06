@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Data Scientist Portfolio - Proven experience in bioinformatics, machine learning, and data visualization">
-  <meta name="keywords" content="Data Scientist, Machine Learning, Bioinformatics, Data Visualization, Portfolio">
-  <title>JR Limited</title>
+  <meta name="description" content="Jonathan Rubin, Ph.D. - Data Science Consultant | Transforming complex data into actionable insights through bioinformatics, machine learning, and advanced analytics">
+  <meta name="keywords" content="Data Science Consultant, Bioinformatics, Machine Learning, Data Analytics, Statistical Analysis, Business Intelligence">
+  <title>Jonathan Rubin, Ph.D. | Data Science Consultant</title>
   
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -17,636 +23,920 @@
 
   <!-- Custom CSS -->
   <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --accent-color: #3b82f6;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --border-color: #e5e7eb;
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f9fa;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background-color: var(--bg-light);
+      overflow-x: hidden;
     }
-    .header {
-        background-image: url('images/header.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        padding: 50px 0;
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary-color) !important;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: var(--text-primary) !important;
+      margin: 0 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color) !important;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 8rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+      background-size: cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin: 0.25rem;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Sections */
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Cards */
+    .card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      background: var(--bg-white);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-body {
+      padding: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .card-text {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Expertise Grid */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .expertise-card {
+      background: var(--bg-white);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .expertise-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .expertise-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    /* Stats */
+    .stats-container {
+      background: var(--bg-white);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: var(--shadow-md);
+      margin: 3rem 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--gradient-primary);
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      background: transparent;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--bg-white);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-primary);
+      color: white;
+      padding: 3rem 0 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: white;
+      margin: 0 0.5rem;
+      font-size: 1.25rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent-color);
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .expertise-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        flex-direction: column;
         text-align: center;
-        position: relative; /* Ensure z-index applies */
-        z-index: 1; /* Make sure it's on top */ 
-    }
-    /* Adjust header padding on small screens */
-    @media (max-width: 576px) {
-      .header {
-        padding: 30px 0;
       }
     }
-    .section-title {
-      color: #343a40;
-      margin-top: 40px;
-      margin-bottom: 20px;
-    }
-    .project-card {
-      margin-bottom: 20px;
-    }
-    footer {
-      background-color: #343a40;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      /* Remove fixed positioning to prevent overlap on mobile */
-      /* position: fixed; */
-      /* width: 100%; */
-      /* bottom: 0; */
-    }
-    /* Custom class to justify text */
-    .text-justify {
-      text-align: justify;
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
 
-    .kpi-value {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #007bff;
+    ::-webkit-scrollbar-track {
+      background: var(--bg-light);
     }
 
-    /* CSS to control the indentation of list items */
-    ol {
-        list-style-position: inside;  /* Ensures the bullet/number is inside the list box */
-        padding-left: 1.5em;          /* Padding to give space for the number */
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 4px;
     }
-    
-    ol li {
-        text-indent: -1.5em;          /* Indent text to align with the bullet */
-        padding-left: 1.5em;          /* Padding for the content to align under the bullet */
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--secondary-color);
     }
   </style>
 </head>
 <body>
 
-  <!-- Header Section -->
-  <header class="header">
-    <h1>Jonathan D. Rubin, PhD</h1>
-    <p>Bioinformatics | Machine Learning | Data Visualization</p>
-  </header>
-
-  <!-- About Me Section -->
-  <section class="container mt-5">
-    <h2 class="section-title text-center">About Me</h2>
-    <div class="row align-items-center">
-      <div class="col-md-4 text-center mb-4 mb-md-0">
-        <img src="images/profile.jpeg" alt="Jonathan D. Rubin, PhD" class="img-fluid rounded-circle border shadow" style="max-width: 200px;">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+              <a class="navbar-brand" href="#home">Jonathan Rubin, Ph.D.</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#expertise">Expertise</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
       </div>
-      <div class="col-md-8">
-        <p class="text-justify">An experienced data scientist specializing in bioinformatics, machine learning, and signal processing. With a background in biological data analysis, I bring a unique perspective to solving complex problems. I have successfully led projects from conception to implementation, delivering actionable insights from data.</p>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 hero-content">
+          <h1>Transforming Data Into Actionable Insights</h1>
+          <p>Expert data science consulting for bioinformatics, machine learning, and advanced analytics. Helping organizations unlock the full potential of their data.</p>
+          <div class="mb-4">
+            <span class="hero-badge">PhD in Bioinformatics</span>
+            <span class="hero-badge">300+ Citations</span>
+            <span class="hero-badge">10+ Years Experience</span>
+          </div>
+          <a href="#contact" class="btn btn-light btn-lg me-3">Start a Project</a>
+          <a href="#expertise" class="btn btn-outline-light btn-lg">Learn More</a>
+        </div>
+        <div class="col-lg-6">
+          <div id="heroVisualization" style="height: 400px;"></div>
+        </div>
       </div>
     </div>
   </section>
-  
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">About Me</h2>
+      <p class="section-subtitle fade-in">Data scientist with deep expertise in biological data analysis and machine learning</p>
+      
+      <div class="row align-items-center">
+        <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                      <img src="images/profile.jpeg" alt="Jonathan Rubin, Ph.D." class="img-fluid rounded-circle shadow-lg" style="max-width: 300px; border: 4px solid white;">
+        </div>
+        <div class="col-lg-8">
+          <div class="fade-in">
+            <h3 class="mb-3">Dr. Jonathan D. Rubin</h3>
+            <p class="lead mb-4">I'm a data science consultant with over a decade of experience in bioinformatics, machine learning, and statistical analysis. My background in biological data analysis gives me a unique perspective on solving complex problems across industries.</p>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-graduation-cap text-primary me-3"></i>
+                  <div>
+                    <strong>PhD in Bioinformatics</strong><br>
+                    <small class="text-muted">Advanced statistical methods</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-chart-line text-primary me-3"></i>
+                  <div>
+                    <strong>300+ Citations</strong><br>
+                    <small class="text-muted">Published research impact</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-code text-primary me-3"></i>
+                  <div>
+                    <strong>Full-Stack Analytics</strong><br>
+                    <small class="text-muted">End-to-end solutions</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-users text-primary me-3"></i>
+                  <div>
+                    <strong>Client Success</strong><br>
+                    <small class="text-muted">Proven track record</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="section" style="background: var(--bg-white);">
+    <div class="container">
+      <div class="stats-container fade-in">
+        <div class="row">
+          <div class="col-md-3 stat-item">
+            <div class="stat-number">300+</div>
+            <div class="stat-label">Research Citations</div>
+          </div>
+          <div class="col-md-3 stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="col-md-3 stat-item">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="col-md-3 stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Client Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Expertise Section -->
-  <section class="container mt-5">
-
-    <div class="row">
-
-    <h2 class="section-title text-center">Expertise</h2>
-
-    <!-- Data Viz -->
-    <div class="col-md-4 project-card">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Data Visualization</h5>
-            <p class="card-text">Intuitive visualizations to help understand your data.</p>
-            <div id="plotlyScatter" class="card-img-top" style="width: 100%"></div>
-          </div>
-        </div>
-      </div>
-
-    <!-- Statistics Card -->
-    <div class="col-md-4 project-card">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Statistics</h5>
-            <p class="card-text">The right statistics to answer your questions.</p>
-            <div class="row text-center">
-                <div class="col-6" style="width: 100%">
-                    <img src="images/pval.png" class="img-fluid mb-2" alt="P-Value">
-                </div>
-                <div class="col-6" style="width: 100%">
-                    <img src="images/linreg.png" class="img-fluid mb-2" alt="Linear Regression">
-                </div>
-    
-                </div>
-          </div>
-        </div>
-      </div>
+  <section id="expertise" class="section">
+    <div class="container">
+      <h2 class="section-title fade-in">Core Expertise</h2>
+      <p class="section-subtitle fade-in">Comprehensive data science solutions tailored to your specific needs</p>
       
-
-      <!-- ML -->
-    <div class="col-md-4 project-card">
-        <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">Machine Learning</h5>
-            <p class="card-text">Advanced models to derive actionable insights.</p>
-            
-            <!-- Grid of Two Images -->
-            <div class="row text-center">
-            <div class="col-6" style="width: 100%">
-                <img src="images/hirearchichal.png" class="img-fluid mb-2" alt="Clustering">
-            </div>
-            <div class="col-6" style="width: 100%">
-                <img src="images/neural_network.png" class="img-fluid mb-2" alt="Neural Network">
-            </div>
-
-            </div>
+      <div class="expertise-grid">
+        <div class="expertise-card fade-in">
+          <div class="expertise-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <h4>Data Visualization</h4>
+          <p>Transform complex data into intuitive, actionable visualizations that drive decision-making and reveal hidden patterns.</p>
+          <img src="images/ma_plot.png" alt="Differential Expression MA Plot" class="img-fluid rounded" style="width: 100%; height: auto; margin-top: 1rem;">
         </div>
+
+        <div class="expertise-card fade-in">
+          <div class="expertise-icon">
+            <i class="fas fa-calculator"></i>
+          </div>
+          <h4>Statistical Analysis</h4>
+          <p>Advanced statistical modeling and hypothesis testing to ensure your insights are robust and scientifically sound.</p>
+          <img src="images/mixed_model.png" alt="Mixed Model Analysis" class="img-fluid rounded shadow-sm" style="width: 100%; height: auto; margin-top: 1rem;">
         </div>
+
+        <div class="expertise-card fade-in">
+          <div class="expertise-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h4>Machine Learning</h4>
+          <p>Custom ML models and algorithms designed to predict outcomes, classify data, and automate decision processes.</p>
+          <img src="images/machine_learning.png" alt="Machine Learning Analysis" class="img-fluid rounded shadow-sm" style="width: 100%; height: auto; margin-top: 1rem;">
+        </div>
+
+        <div class="expertise-card fade-in">
+          <div class="expertise-icon">
+            <i class="fas fa-flask"></i>
+          </div>
+          <h4>Scientific Approach</h4>
+          <p>Rigorous, evidence-based methodology following the scientific method to ensure reliable, reproducible, and validated results.</p>
+          <img src="images/scientific_approach.png" alt="Scientific Approach" class="img-fluid rounded shadow-sm" style="width: 100%; height: auto; margin-top: 1rem;">
+        </div>
+      </div>
     </div>
-   
-    
-    </div>
+  </section>
 
-    <div class="row">
-
-    <h2 class="section-title text-center">Example projects</h2>
-
-        <!-- Bioinformatics -->
-        <div class="col-md-4 project-card">
-            <div class="card h-100">
+  <!-- Projects Section -->
+  <section id="projects" class="section" style="background: var(--bg-white);">
+    <div class="container">
+      <h2 class="section-title fade-in">Featured Projects</h2>
+      <p class="section-subtitle fade-in">Real-world applications of data science across diverse domains</p>
+      
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100 fade-in">
             <div class="card-body">
-                <h5 class="card-title">Bioinformatic Data Pipelines</h5>
-                <p class="card-text">Automated bioinformatic pipelines with custom analyses for any sequencing technology.</p>
-                <img src="images/bioinformatic_pipeline.png" class="card-img-top img-fluid" alt="Project Image">
-            </div>
-            </div>
-        </div>
-
-        <!-- Signal Processing Card -->
-        <div class="col-md-4 project-card">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Signal Processing</h5>
-                    <p class="card-text">Extract information from complex signals.</p>
-                    
-                    <div id="compoundSignalPlot" class="mb-3" style="width: 100%"></div>
-                    <div id="componentSignalPlot" class="mb-3" style="width: 100%"></div>
+              <h5 class="card-title">
+                <i class="fas fa-dna text-primary me-2"></i>
+                Bioinformatics Pipelines
+              </h5>
+              <p class="card-text">End-to-end genomic analysis pipelines using AWS HealthOmics, processing terabytes of sequencing data with automated quality control and custom statistical analyses.</p>
+              
+              <!-- Modern AWS Pipeline Visualization -->
+              <div class="pipeline-viz mb-3" style="height: 200px; position: relative; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 8px; padding: 15px;">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <small class="text-muted fw-bold">AWS HealthOmics Pipeline</small>
+                  <small class="text-success fw-bold">✓ Automated</small>
                 </div>
-            </div>
-        </div>
-
-        <!-- Business Intelligence Project Card -->
-        <div class="col-md-4 project-card">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Business Intelligence</h5>
-                    <p class="card-text">Analyze sales, customer insights, and operational performance.</p>
-                    
-                    <div id="plotlyDashboard" class="mb-3" style="width:100%"></div>
-
-                    <!-- Progress Bars (example) -->
-                    <p>Sales Target</p>
-                    <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 80%">80%</div>
+                
+                <!-- Pipeline Steps -->
+                <div class="d-flex justify-content-between align-items-center" style="height: 120px;">
+                  <!-- Step 1 -->
+                  <div class="text-center" style="flex: 1;">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 12px;">
+                      <i class="fas fa-upload"></i>
                     </div>
+                    <div class="mt-1">
+                      <small class="text-muted d-block">S3 Storage</small>
+                      <small class="text-muted d-block">Raw Data</small>
+                    </div>
+                  </div>
+                  
+                  <!-- Arrow -->
+                  <div class="text-primary">
+                    <i class="fas fa-arrow-right"></i>
+                  </div>
+                  
+                  <!-- Step 2 -->
+                  <div class="text-center" style="flex: 1;">
+                    <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 12px;">
+                      <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="mt-1">
+                      <small class="text-muted d-block">HealthOmics</small>
+                      <small class="text-muted d-block">Processing</small>
+                    </div>
+                  </div>
+                  
+                  <!-- Arrow -->
+                  <div class="text-primary">
+                    <i class="fas fa-arrow-right"></i>
+                  </div>
+                  
+                  <!-- Step 3 -->
+                  <div class="text-center" style="flex: 1;">
+                    <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 12px;">
+                      <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="mt-1">
+                      <small class="text-muted d-block">Custom</small>
+                      <small class="text-muted d-block">Analytics</small>
+                    </div>
+                  </div>
+                  
+                  <!-- Arrow -->
+                  <div class="text-primary">
+                    <i class="fas fa-arrow-right"></i>
+                  </div>
+                  
+                  <!-- Step 4 -->
+                  <div class="text-center" style="flex: 1;">
+                    <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 12px;">
+                      <i class="fas fa-database"></i>
+                    </div>
+                    <div class="mt-1">
+                      <small class="text-muted d-block">Results</small>
+                      <small class="text-muted d-block">Storage</small>
+                    </div>
+                  </div>
                 </div>
+                
+                <!-- Status Bar -->
+                <div class="progress" style="height: 4px;">
+                  <div class="progress-bar bg-success" style="width: 100%"></div>
+                </div>
+              </div>
+              
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-primary">AWS HealthOmics</span>
+                <span class="badge bg-success">Python/R</span>
+                <span class="badge bg-warning">Custom Analytics</span>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="row">
-        <div>
-            <h3>Publications</h3>
-            <p id="citation-count">Over <strong>300</strong> citations, <a href="https://scholar.google.com/citations?user=yMGaQUoAAAAJ" target="_blank">
-                view my publications and citations on Google Scholar
-            </a></p>
-            <ol id="publications"></ol>
-        </div>
-        
-        
-    </div>
 
-    
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100 fade-in">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-wave-square text-primary me-2"></i>
+                Signal Processing
+              </h5>
+              <p class="card-text">Advanced signal decomposition and analysis for extracting meaningful information from complex time-series data.</p>
+              <div id="signalProcessingDemo" style="height: 200px;"></div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="badge bg-primary">Real-time</span>
+                <span class="badge bg-success">Fourier Analysis</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100 fade-in">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-chart-line text-primary me-2"></i>
+                Business Intelligence
+              </h5>
+              <p class="card-text">Comprehensive analytics dashboards providing real-time insights into sales performance, customer behavior, and operational metrics.</p>
+              <div id="businessIntelligenceDemo" style="height: 200px;"></div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="badge bg-primary">Dashboard</span>
+                <span class="badge bg-success">Predictive</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Contact Section -->
-  <section class="container mt-5">
-    <h2 class="section-title text-center">Contact</h2>
-    <p class="text-center">Interested in collaborating or hiring me for a project? Feel free to reach out.</p>
-    
-    <div class="text-center">
-      <a href="mailto:jd.rubin91@gmail.com" class="btn btn-success">Email Me</a>
-      <a href="https://www.linkedin.com/in/jonathan-d-rubin/" class="btn btn-info" target="_blank">LinkedIn</a>
-      <p></p>
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-section fade-in">
+        <div class="contact-icon">
+          <i class="fas fa-paper-plane"></i>
+        </div>
+        <h2 class="mb-3">Ready to Transform Your Data?</h2>
+        <p class="lead mb-4">Let's discuss how data science can drive your organization's success. I offer flexible consulting arrangements tailored to your specific needs.</p>
+        
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <a href="mailto:jd.rubin91@gmail.com" class="btn btn-primary w-100">
+                  <i class="fas fa-envelope me-2"></i>
+                  Email Me
+                </a>
+              </div>
+              <div class="col-md-6">
+                <a href="https://www.linkedin.com/in/jonathan-d-rubin/" class="btn btn-outline w-100" target="_blank">
+                  <i class="fab fa-linkedin me-2"></i>
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-4">
+          <small class="text-muted">
+            <i class="fas fa-clock me-1"></i>
+            Response within 24 hours
+          </small>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2024 Jonathan D. Rubin, PhD | Data Scientist | Colorado</p>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <p>&copy; 2024 Jonathan Rubin, Ph.D. | Data Science Consultant</p>
+        </div>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/jonathan-d-rubin/" target="_blank">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://scholar.google.com/citations?user=yMGaQUoAAAAJ" target="_blank">
+            <i class="fas fa-graduation-cap"></i>
+          </a>
+          <a href="mailto:jd.rubin91@gmail.com">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
-    <script>
-        // Generate random data for the 3D plot
-        var N = 100;
-        var x = [];
-        var y = [];
-        var z = [];
-    
-        for (var i = 0; i < N; i++) {
-          x.push(Math.random() * 10);
-          y.push(Math.random() * 10);
-          z.push(Math.random() * 10);
-        }
-        
-
-        var cx = [];
-        var cy = [];
-        var cz = [];
-        // Generate a small cluster of points around a specific location (e.g., near [5, 5, 5])
-        var clusterSize = 30;  // Size of the cluster
-        var clusterCenter = [7, 7, 7];  // Center of the cluster
-        for (var i = 0; i < clusterSize; i++) {
-          // Points around the cluster center, with a small random offset
-          cx.push(clusterCenter[0] + Math.random() * 0.75);
-          cy.push(clusterCenter[1] + Math.random() * 0.75);
-          cz.push(clusterCenter[2] + Math.random() * 0.75);
-        }
-    
-        var data = [{
-          x: x,
-          y: y,
-          z: z,
-          mode: 'markers',
-          type: 'scatter3d',
-          name: 'background',
-          marker: {
-            size: 5,
-            color: z,              // Set color based on z values
-            colorscale: 'Viridis', // Choose a colorscale
-            opacity: 0.8
-          }
-        },
-        {
-          x: cx,
-          y: cy,
-          z: cz,
-          mode: 'markers',
-          type: 'scatter3d',
-          name: 'signal',
-          marker: {
-            size: 5,
-            color: 'red',
-            opacity: 0.8
-          }
-        }
-    ];
-    
-        var layout = {
-          margin: { l: 0, r: 0, b: 0, t: 0 },
-          showlegend: false,  // Turn off the legend
-          scene: {
-            xaxis: { title: '', showticklabels: false },
-            yaxis: { title: '', showticklabels: false },
-            zaxis: { title: '', showticklabels: false }
-          },
-          responsive: true
-        };
-
-        var config = {
-        displayModeBar: false,  // Disable the mode bar (toolbar)
-        scrollZoom: false,      // Disable scroll-to-zoom
-        doubleClick: false,     // Disable double-click to reset
-        showTips: true,         // Enable hover functionality
-        staticPlot: false       // Keep interactivity enabled for hover
-        };
-    
-        Plotly.newPlot('plotlyScatter', data, layout, config);
-
-        // Function to rotate the plot around the z-axis
-        var angle = 0;
-        var rotating = true;  // Flag to stop the rotation on user interaction
-
-        function rotate() {
-            if (!rotating) return;  // Stop the rotation if the user interacted with the plot
-            angle += 0.01;  // Adjust this value to control the rotation speed
-
-            var camera = {
-            eye: {
-                x: 2 * Math.cos(angle),
-                y: 2 * Math.sin(angle),
-                z: 0.1
-            }
-            };
-
-            Plotly.relayout('plotlyScatter', {
-            'scene.camera': camera
-            });
-
-            requestAnimationFrame(rotate);  // Continue rotating
-        }
-
-        // Start the rotation
-        rotate();
-
-        // Stop the rotation when the user interacts with the plot (click anywhere)
-        var plotlyElement = document.getElementById('plotlyScatter');
-        plotlyElement.addEventListener('mousedown', function() {
-            rotating = false;
-        });
-      </script>
-
-    <script>
-    // Example sales data for four quarters
-    var xData = ['Q1', 'Q2', 'Q3', 'Q4'];
-    var yData = [150, 200, 300, 400];
-
-    // Calculate basic statistics: Mean and Standard Deviation
-    var meanY = yData.reduce((a, b) => a + b) / yData.length; // Calculate mean
-    var stdDevY = Math.sqrt(yData.map(y => Math.pow(y - meanY, 2)).reduce((a, b) => a + b) / yData.length); // Calculate standard deviation
-
-    // Trace for sales data
-    var traceSales = {
-        type: 'bar',
-        x: xData,
-        y: yData,
-        name: 'Sales',
-        marker: {
-        color: 'rgba(55,128,191,0.6)',
-        line: {
-            color: 'rgba(55,128,191,1.0)',
-            width: 2
-        }
-        }
-    };
-
-    // Adding a linear regression trendline (simple y = mx + c formula for linear regression)
-    var trendlineY = yData.map((y, i) => (meanY + (i - 1.5) * stdDevY / 1.5).toFixed(2));  // Simulating a trendline based on mean and deviation
-
-    var traceTrendline = {
-        type: 'scatter',
-        mode: 'lines',
-        x: xData,
-        y: trendlineY,
-        name: 'Trendline',
-        line: {
-        color: 'red',
-        width: 2,
-        dash: 'dash'
-        }
-    };
-
-    // Data array containing both sales and trendline
-    var data = [traceSales, traceTrendline];
-
-    // Layout with statistical annotations
-    var layout = {
-        title: 'Quarterly Sales',
-        annotations: [
-        {
-            xref: 'paper',
-            yref: 'paper',
-            x: 0.5,
-            y: 1.1,
-            xanchor: 'center',
-            yanchor: 'top',
-            text: `Mean: $${meanY.toFixed(2)} | SD: $${stdDevY.toFixed(2)}`,
-            showarrow: false,
-            font: {
-            size: 12,
-            color: 'gray'
-            }
-        }
-        ],
-        showlegend: false,
-        responsive: true,
-        margin: { t: 70, l: 30, r: 30, b: 20 }
-    };
-    Plotly.newPlot('plotlyDashboard', data, layout, { staticPlot: true });
-    </script>
-
-    <script>// Time values for both the compound and component signals
-        var x = [];
-        for (var i = 0; i < 100; i++) {
-          x.push(i * 0.1);
-        }
-        
-        // Initial signals (before animation)
-        var signal1 = x.map(function(val) {
-          return Math.sin(val);
-        });
-        var signal2 = x.map(function(val) {
-          return 0.5 * Math.sin(10 * val);
-        });
-        var compoundSignal = x.map(function(val, i) {
-          return signal1[i] + signal2[i];
-        });
-        
-        // Plot the component signals
-        var traceSignal1 = {
-          x: x,
-          y: signal1,
-          mode: 'lines',
-          line: { color: 'green' },
-          name: 'Component Signal 1',
-          type: 'scatter'
-        };
-        var traceSignal2 = {
-          x: x,
-          y: signal2,
-          mode: 'lines',
-          line: { color: 'red' },
-          name: 'Component Signal 2',
-          type: 'scatter'
-        };
-        
-        // Plot the compound signal
-        var traceCompound = {
-          x: x,
-          y: compoundSignal,
-          mode: 'lines',
-          line: { color: 'blue' },
-          name: 'Compound Signal',
-          type: 'scatter'
-        };
-        
-        // Layout for the plots
-        var layoutCompound = {
-          title: '',
-          xaxis: { title: '' },
-          yaxis: { title: '', range: [-1.7, 1.7] },
-          margin: { l: 35, r: 10, t: 0, b: 30 },
-          height: 300,
-          autosize: true
-        };
-        
-        var layoutComponents = {
-          title: '',
-          xaxis: { title: 'Time' },
-          yaxis: { title: '', range: [-1.7, 1.7] },
-          showlegend: false,  // Turn off the legend
-          margin: { l: 35, r: 10, t: 0, b: 30 },
-          height: 300,
-          autosize: true
-        };
-        
-        // Render the initial plots
-        // Render both component signals on the same plot (same time scale)
-        Plotly.newPlot('componentSignalPlot', [traceSignal1, traceSignal2], layoutComponents, { staticPlot: true });
-        Plotly.newPlot('compoundSignalPlot', [traceCompound], layoutCompound, { staticPlot: true });
-        
-        // Animate the component and compound signals
-        var phase = 0;
-        var phase2 = 0;
-        function animateSignals() {
-          phase += 0.1;
-          phase2 += 1
-        
-          // Update the component signals with phase shift
-          var newSignal1 = x.map(function(val) {
-            return Math.sin(val + phase);
-          });
-          var newSignal2 = x.map(function(val) {
-            return 0.5 * Math.sin(10 * val + phase2);
-          });
-          var newCompoundSignal = x.map(function(val, i) {
-            return newSignal1[i] + newSignal2[i];
-          });
-        
-          // Update the component signals plot (same time scale)
-          Plotly.animate('componentSignalPlot', {
-            data: [
-              { y: newSignal1 },  // Update signal1
-              { y: newSignal2 }   // Update signal2
-            ]
-          }, {
-            transition: {
-              duration: 0
-            },
-            frame: {
-              duration: 50,
-              redraw: true
-            }
-          });
-        
-          // Update the compound signal plot
-          Plotly.animate('compoundSignalPlot', {
-            data: [{ y: newCompoundSignal }]
-          }, {
-            transition: {
-              duration: 0
-            },
-            frame: {
-              duration: 50,
-              redraw: true
-            }
-          });
-        
-          // Keep animating
-          requestAnimationFrame(animateSignals);
-        }
-        
-        // Start the animation
-        animateSignals();
-    </script>
-  
+  <!-- Custom JavaScript -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const sections = document.querySelectorAll('.fade-section');
-
-        // Debounce function to reduce scroll event firing frequency
-        function debounce(func, wait = 20, immediate = true) {
-            let timeout;
-            return function() {
-                let context = this, args = arguments;
-                let later = function() {
-                    timeout = null;
-                    if (!immediate) func.apply(context, args);
-                };
-                let callNow = immediate && !timeout;
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-                if (callNow) func.apply(context, args);
-            };
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
-    
-        function handleScroll() {
-            const windowHeight = window.innerHeight;
-    
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect(); // Get the position of the section
-    
-                // Calculate how much of the section is visible
-                let sectionTop = rect.top;
-                let sectionBottom = rect.bottom;
-                let sectionHeight = rect.height;
-
-                // Adjust for smoother fade-out when the element is entering or leaving the viewport
-                let visibleRatio;
-    
-                if (sectionTop > windowHeight) {
-                    // Section is fully below the viewport
-                    visibleRatio = 0;
-                } else if (sectionBottom < 0) {
-                    // Section is fully above the viewport
-                    visibleRatio = 0;
-                } else {
-                    // Section is in view, calculate the visible ratio
-                    let distanceToTop = Math.min(sectionHeight, windowHeight - sectionTop);
-                    visibleRatio = distanceToTop / sectionHeight;
-                }
-    
-                // Apply the visible ratio to opacity and transform for smooth fading
-                section.style.opacity = visibleRatio;
-                section.style.transform = `translateY(${(1 - visibleRatio) * 20}px)`; // Move up/down more smoothly
-            });
-        }
-    
-        // Run on initial load
-        handleScroll();
-    
-        // Attach debounced scroll event to window for better performance
-        window.addEventListener('scroll', debounce(handleScroll));
+      });
     });
-</script>
-<script>
-    const orcidId = '0000-0003-1129-2910'; // Replace with your ORCID ID
-    const url = `https://pub.orcid.org/v3.0/${orcidId}/works`;
 
-    fetch(url, {
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const works = data.group;
-        const publicationsDiv = document.getElementById('publications');
-
-        // Loop through works and display title, year, journal, and DOI (if available)
-        works.forEach((work, index) => {
-            const title = work['work-summary'][0].title.title.value;
-            const publicationYear = work['work-summary'][0]['publication-date']?.year?.value || 'No year available';
-            const journal = work['work-summary'][0]['journal-title']?.value || 'No journal available';
-            
-            // Find the DOI in the external identifiers
-            let doi = 'No DOI available';  // Default if no DOI
-            const identifiers = work['work-summary'][0]['external-ids']['external-id'];
-            identifiers.forEach(identifier => {
-                if (identifier['external-id-type'] === 'doi') {
-                    doi = identifier['external-id-value'];
-                }
-            });
-
-            // Create an ordered list item for each work
-            const citation = document.createElement('li');
-            citation.innerHTML = `<strong>${title}</strong> (${publicationYear}), ${journal}, DOI: ${doi !== 'No DOI available' ? `<a href="https://doi.org/${doi}" target="_blank">${doi}</a>` : doi}`;
-            publicationsDiv.appendChild(citation);
-        });
-    })
-    .catch(error => {
-        console.error('Error fetching ORCID data:', error);
+    // Navbar background on scroll
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.boxShadow = 'none';
+      }
     });
-</script>
 
+    // Fade-in animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Hero Visualization - 3D Scatter Plot
+    const heroData = [{
+      x: Array.from({length: 80}, () => Math.random() * 8 + 1),
+      y: Array.from({length: 80}, () => Math.random() * 8 + 1),
+      z: Array.from({length: 80}, () => Math.random() * 8 + 1),
+      mode: 'markers',
+      type: 'scatter3d',
+      marker: {
+        size: 3,
+        color: Array.from({length: 80}, () => Math.random() * 8 + 1),
+        colorscale: 'Viridis',
+        opacity: 0.7
+      }
+    }];
+
+    const heroLayout = {
+      margin: { l: 0, r: 0, b: 0, t: 0 },
+      scene: {
+        xaxis: { 
+          showticklabels: false, 
+          showgrid: true, 
+          zeroline: true,
+          gridcolor: 'rgba(255,255,255,0.1)',
+          zerolinecolor: 'rgba(255,255,255,0.3)',
+          title: '',
+          range: [0, 10]
+        },
+        yaxis: { 
+          showticklabels: false, 
+          showgrid: true, 
+          zeroline: true,
+          gridcolor: 'rgba(255,255,255,0.1)',
+          zerolinecolor: 'rgba(255,255,255,0.3)',
+          title: '',
+          range: [0, 10]
+        },
+        zaxis: { 
+          showticklabels: false, 
+          showgrid: true, 
+          zeroline: true,
+          gridcolor: 'rgba(255,255,255,0.1)',
+          zerolinecolor: 'rgba(255,255,255,0.3)',
+          title: '',
+          range: [0, 10]
+        },
+        bgcolor: 'rgba(0,0,0,0)',
+        camera: {
+          eye: { x: 1.5, y: 1.5, z: 1.5 }
+        }
+      },
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
+      showlegend: false
+    };
+
+    Plotly.newPlot('heroVisualization', heroData, heroLayout, {
+      displayModeBar: false,
+      responsive: true,
+      scrollZoom: false
+    });
+
+    // Prevent the 3D plot from capturing scroll events
+    const heroPlot = document.getElementById('heroVisualization');
+    
+    // Add a wrapper div to handle scroll events
+    heroPlot.addEventListener('wheel', function(e) {
+      // Prevent the default behavior and let the page handle scrolling
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Manually trigger page scroll
+      window.scrollBy({
+        top: e.deltaY,
+        behavior: 'auto'
+      });
+    }, { passive: false });
+
+
+
+    // Signal Processing Demo
+    const time = Array.from({length: 100}, (_, i) => i * 0.1);
+    const signal1 = time.map(t => Math.sin(t));
+    const signal2 = time.map(t => 0.5 * Math.sin(5 * t));
+    const compound = time.map((t, i) => signal1[i] + signal2[i]);
+
+    const signalData = [
+      { x: time, y: signal1, type: 'scatter', mode: 'lines', name: 'Signal 1', line: { color: '#3b82f6' } },
+      { x: time, y: signal2, type: 'scatter', mode: 'lines', name: 'Signal 2', line: { color: '#ef4444' } },
+      { x: time, y: compound, type: 'scatter', mode: 'lines', name: 'Compound', line: { color: '#10b981' } }
+    ];
+
+    const signalLayout = {
+      margin: { l: 30, r: 10, t: 10, b: 30 },
+      xaxis: { showgrid: false, title: '' },
+      yaxis: { showgrid: true, gridcolor: '#f1f5f9', title: '' },
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
+      showlegend: false
+    };
+
+    Plotly.newPlot('signalProcessingDemo', signalData, signalLayout, {
+      displayModeBar: false,
+      responsive: true
+    });
+
+    // Business Intelligence Demo
+    const biData = [{
+      x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      y: [85, 92, 78, 95, 88, 102],
+      type: 'scatter',
+      mode: 'lines+markers',
+      line: { color: '#3b82f6', width: 3 },
+      marker: { size: 8, color: '#3b82f6' }
+    }];
+
+    const biLayout = {
+      margin: { l: 30, r: 10, t: 10, b: 30 },
+      xaxis: { showgrid: false },
+      yaxis: { showgrid: true, gridcolor: '#f1f5f9' },
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
+      showlegend: false
+    };
+
+    Plotly.newPlot('businessIntelligenceDemo', biData, biLayout, {
+      displayModeBar: false,
+      responsive: true
+    });
+  </script>
 
 </body>
 </html>
